@@ -142,7 +142,7 @@ class DbValidator
     private function checkDatabaseName(\Magento\Framework\DB\Adapter\AdapterInterface $connection, $dbName)
     {
         try {
-            $connection->query("SHOW TABLES FROM $dbName")->fetchAll(\PDO::FETCH_COLUMN, 0);
+            $connection->query('SHOW TABLES FROM ' . $connection->quoteIdentifier($dbName))->fetchAll(\PDO::FETCH_COLUMN, 0);
             return true;
         } catch (\Exception $e) {
             throw new \Magento\Setup\Exception(
